@@ -34,7 +34,7 @@ var Boplex = {};
   }
 
   function defineConstProp($x, propName, propVal){
-    Object.defineProperty($x.prototype, propName, {
+    Object.defineProperty($x, propName, {
       writable: false,
       value: propVal,
     });
@@ -101,7 +101,7 @@ var boplexTest = {};
 (function(boplexTest){
 
   function Point(name, x, y) {
-    Boplex.BaseObj.call(this);
+    Boplex.BaseObject.call(this);
     this.name = name;
     var _x = x;
     var _y = y;
@@ -110,7 +110,7 @@ var boplexTest = {};
       return $t.name;
     }
 
-    Point.prototype.getProductName = function(){
+    Point.prototype.getName = function(){
       return _getName.call(this, this);
     };
 
@@ -124,7 +124,9 @@ var boplexTest = {};
 })(boplexTest);
 
 
-var bo = new Boplex.BaseObj();
+console.log("Boplex Version: " +Boplex.Version);
+
+var bo = new Boplex.BaseObject();
 console.log(bo.getClassName());
 
 var pt = new boplexTest.Point("A", 3, 0);

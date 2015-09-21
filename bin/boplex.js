@@ -34,7 +34,7 @@ var Boplex = {};
   }
 
   function defineConstProp($x, propName, propVal){
-    Object.defineProperty($x.prototype, propName, {
+    Object.defineProperty($x, propName, {
       writable: false,
       value: propVal,
     });

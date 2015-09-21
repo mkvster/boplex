@@ -2,7 +2,7 @@
 (function(boplexTest){
 
   function Point(name, x, y) {
-    Boplex.BaseObj.call(this);
+    Boplex.BaseObject.call(this);
     this.name = name;
     var _x = x;
     var _y = y;
@@ -11,7 +11,7 @@
       return $t.name;
     }
 
-    Point.prototype.getProductName = function(){
+    Point.prototype.getName = function(){
       return _getName.call(this, this);
     };
 
