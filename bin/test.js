@@ -53,8 +53,8 @@ var Boplex = {};
 
 })(Boplex);
 
-"use strict";
 (function(Boplex){
+  "use strict";
 
   function BaseObject() {
     BaseObject.prototype.getClassName = function() {
@@ -70,8 +70,8 @@ var Boplex = {};
 
 })(Boplex);
 
-"use strict";
 (function(Boplex){
+  "use strict";
 
   function Logger(name){
     var _name = name;
@@ -97,8 +97,8 @@ var boplexTest = {};
 
 })(boplexTest);
 
-"use strict";
 (function(boplexTest){
+  "use strict";
 
   function Point(name, x, y) {
     Boplex.BaseObject.call(this);
@@ -122,7 +122,6 @@ var boplexTest = {};
   Boplex.inherit(boplexTest, Point, Boplex.BaseObject);
 
 })(boplexTest);
-
 
 console.log("Boplex Version: " +Boplex.Version);
 

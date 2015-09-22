@@ -1,5 +1,5 @@
-"use strict";
 (function(boplexTest){
+  "use strict";
 
   function Point(name, x, y) {
     Boplex.BaseObject.call(this);
@@ -23,4 +23,3 @@
   Boplex.inherit(boplexTest, Point, Boplex.BaseObject);
 
 })(boplexTest);
-

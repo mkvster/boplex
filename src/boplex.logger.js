@@ -1,5 +1,5 @@
-"use strict";
 (function(Boplex){
+  "use strict";
 
   function Logger(name){
     var _name = name;

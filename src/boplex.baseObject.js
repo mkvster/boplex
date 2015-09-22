@@ -1,5 +1,5 @@
-"use strict";
 (function(Boplex){
+  "use strict";
 
   function BaseObject() {
     BaseObject.prototype.getClassName = function() {

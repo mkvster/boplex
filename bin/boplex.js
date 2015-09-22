@@ -53,8 +53,8 @@ var Boplex = {};
 
 })(Boplex);
 
-"use strict";
 (function(Boplex){
+  "use strict";
 
   function BaseObject() {
     BaseObject.prototype.getClassName = function() {
@@ -70,8 +70,8 @@ var Boplex = {};
 
 })(Boplex);
 
-"use strict";
 (function(Boplex){
+  "use strict";
 
   function Logger(name){
     var _name = name;
