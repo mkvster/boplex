@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "homepage": "https://github.com/mkvster/boplex.js",
   "authors": [
-    "mkvster <mkvster@gmail.com>"
+    "mkvster"
   ],
   "description": "Boilerplate experimental",
   "main": "bin/boplex.js",
