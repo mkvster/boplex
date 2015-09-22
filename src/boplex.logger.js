@@ -9,8 +9,8 @@
     };
   }
 
-  function publish($x){
-    $x.Logger = Logger;
+  function publish(x){
+    x.Logger = Logger;
   }
 
   publish(Boplex);

@@ -7,8 +7,8 @@
     };
   }
 
-  function publish($x){
-    $x.BaseObject = BaseObject;
+  function publish(x){
+    x.BaseObject = BaseObject;
   }
 
   publish(Boplex);

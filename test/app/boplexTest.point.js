@@ -7,8 +7,8 @@
     var _x = x;
     var _y = y;
 
-    function _getName($t){
-      return $t.name;
+    function _getName(t){
+      return t.name;
     }
 
     Point.prototype.getName = function(){

@@ -3,7 +3,7 @@ var Boplex = {};
 
 (function(Boplex){
 
-  var _version = "0.0.1";
+  var _version = "0.0.2";
 
   function getFuncName(f){
     var funcNameRegex = /function (.{1,})\(/;
@@ -11,13 +11,13 @@ var Boplex = {};
     return (results && results.length > 1) ? results[1] : "";
   }
 
-  function include($x, child){
-    var x = getFuncName(child);
-    $x[x] = child;
+  function include(x, child){
+    var name = getFuncName(child);
+    x[name] = child;
   }
 
-  function inherit($x, child,parent){
-    include($x, child);
+  function inherit(x, child,parent){
+    include(x, child);
     child.prototype = Object.create(parent.prototype);
     child.prototype.constructor = child;
   }
@@ -33,19 +33,19 @@ var Boplex = {};
     return datetime;
   }
 
-  function defineConstProp($x, propName, propVal){
-    Object.defineProperty($x, propName, {
+  function defineConstProp(x, propName, propVal){
+    Object.defineProperty(x, propName, {
       writable: false,
       value: propVal,
     });
   }
 
-  function publish($x){
-    $x.getFuncName = getFuncName;
-    $x.defineConstProp = defineConstProp;
-    $x.include = include;
-    $x.inherit = inherit;
-    $x.getLogTime = getLogTime;
+  function publish(x){
+    x.getFuncName = getFuncName;
+    x.defineConstProp = defineConstProp;
+    x.include = include;
+    x.inherit = inherit;
+    x.getLogTime = getLogTime;
   }
 
   defineConstProp(Boplex, "Version", _version);
@@ -62,8 +62,8 @@ var Boplex = {};
     };
   }
 
-  function publish($x){
-    $x.BaseObject = BaseObject;
+  function publish(x){
+    x.BaseObject = BaseObject;
   }
 
   publish(Boplex);
@@ -81,8 +81,8 @@ var Boplex = {};
     };
   }
 
-  function publish($x){
-    $x.Logger = Logger;
+  function publish(x){
+    x.Logger = Logger;
   }
 
   publish(Boplex);
@@ -93,7 +93,7 @@ var Boplex = {};
 var boplexTest = {};
 (function(boplexTest){
 
-  boplexTest.Version = "1.0.0";
+  boplexTest.Version = "0.0.1";
 
 })(boplexTest);
 
@@ -106,8 +106,8 @@ var boplexTest = {};
     var _x = x;
     var _y = y;
 
-    function _getName($t){
-      return $t.name;
+    function _getName(t){
+      return t.name;
     }
 
     Point.prototype.getName = function(){
