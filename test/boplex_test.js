@@ -1,4 +1,4 @@
-console.log("Boplex Version: " +Boplex.Version);
+console.log("Boplex Version: " + Boplex.Version);
 
 var bo = new Boplex.BaseObject();
 console.log(bo.getClassName());
