@@ -11,6 +11,10 @@ var Boplex = {};
     return (results && results.length > 1) ? results[1] : "";
   }
 
+  function getClassName(obj){
+    return getFuncName(obj.constructor);
+  }
+
   function include(x, child){
     var name = getFuncName(child);
     x[name] = child;
@@ -42,6 +46,7 @@ var Boplex = {};
 
   function publish(x){
     x.getFuncName = getFuncName;
+    x.getClassName = getClassName;
     x.defineConstProp = defineConstProp;
     x.include = include;
     x.inherit = inherit;
@@ -53,12 +58,12 @@ var Boplex = {};
 
 })(Boplex);
 
-(function(Boplex){
+(function(target){
   "use strict";
 
   function BaseObject() {
     BaseObject.prototype.getClassName = function() {
-      return Boplex.getFuncName((this).constructor);
+      return Boplex.getClassName(this);
     };
   }
 
@@ -66,7 +71,7 @@ var Boplex = {};
     x.BaseObject = BaseObject;
   }
 
-  publish(Boplex);
+  publish(target);
 
 })(Boplex);
 
@@ -116,15 +121,16 @@ var Boplex = {};
 var boplexTest = {};
 (function(boplexTest){
 
-  boplexTest.Version = "0.0.1";
+  boplexTest.Version = "0.0.2";
 
 })(boplexTest);
 
-(function(boplexTest){
+(function(target){
   "use strict";
 
   function Point(name, x, y, onMoved) {
     Boplex.BaseObject.call(this);
+    var _logger = new Boplex.Logger("boplexTest." + this.getClassName());
     this.name = name;
     var _x = x;
     var _y = y;
@@ -143,16 +149,18 @@ var boplexTest = {};
     };
 
     Point.prototype.setPosition = function(pos){
+      _logger.log("x:" + _x + ", y: " + _y);
       _x = pos.x;
       _y = pos.y;
       (new Boplex.Event(this, _onMoved)).raise(pos);
+      _logger.log("x:" + _x + ", y: " + _y);
     };
   }
-  Boplex.inherit(boplexTest, Point, Boplex.BaseObject);
+  Boplex.inherit(target, Point, Boplex.BaseObject);
 
 })(boplexTest);
 
-console.log("Boplex Version: " +Boplex.Version);
+console.log("Boplex Version: " + Boplex.Version);
 
 var bo = new Boplex.BaseObject();
 console.log(bo.getClassName());

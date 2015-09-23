@@ -1,9 +1,9 @@
-(function(Boplex){
+(function(target){
   "use strict";
 
   function BaseObject() {
     BaseObject.prototype.getClassName = function() {
-      return Boplex.getFuncName((this).constructor);
+      return Boplex.getClassName(this);
     };
   }
 
@@ -11,6 +11,6 @@
     x.BaseObject = BaseObject;
   }
 
-  publish(Boplex);
+  publish(target);
 
 })(Boplex);

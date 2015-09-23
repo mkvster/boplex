@@ -11,6 +11,10 @@ var Boplex = {};
     return (results && results.length > 1) ? results[1] : "";
   }
 
+  function getClassName(obj){
+    return getFuncName(obj.constructor);
+  }
+
   function include(x, child){
     var name = getFuncName(child);
     x[name] = child;
@@ -42,6 +46,7 @@ var Boplex = {};
 
   function publish(x){
     x.getFuncName = getFuncName;
+    x.getClassName = getClassName;
     x.defineConstProp = defineConstProp;
     x.include = include;
     x.inherit = inherit;
