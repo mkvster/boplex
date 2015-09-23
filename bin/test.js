@@ -89,6 +89,29 @@ var Boplex = {};
 
 })(Boplex);
 
+(function(Boplex){
+  "use strict";
+
+  function Event(context, handler){
+    var _context = context;
+    var _handler = handler;
+
+    Event.prototype.raise = function (args) {
+      if (!_handler){
+        return;
+      }
+      _handler(_context, args);
+    };
+  }
+
+  function publish(x){
+    x.Event = Event;
+  }
+
+  publish(Boplex);
+
+})(Boplex);
+
 "use strict";
 var boplexTest = {};
 (function(boplexTest){
@@ -100,11 +123,12 @@ var boplexTest = {};
 (function(boplexTest){
   "use strict";
 
-  function Point(name, x, y) {
+  function Point(name, x, y, onMoved) {
     Boplex.BaseObject.call(this);
     this.name = name;
     var _x = x;
     var _y = y;
+    var _onMoved = onMoved;
 
     function _getName(t){
       return t.name;
@@ -118,6 +142,11 @@ var boplexTest = {};
       return {x: _x, y: _y};
     };
 
+    Point.prototype.setPosition = function(pos){
+      _x = pos.x;
+      _y = pos.y;
+      (new Boplex.Event(this, _onMoved)).raise(pos);
+    };
   }
   Boplex.inherit(boplexTest, Point, Boplex.BaseObject);
 
@@ -128,7 +157,11 @@ console.log("Boplex Version: " +Boplex.Version);
 var bo = new Boplex.BaseObject();
 console.log(bo.getClassName());
 
-var pt = new boplexTest.Point("A", 3, 0);
+var pt = new boplexTest.Point("A", 3, 0, function(pt, pos){
+  console.log("Point \"" + pt.getName() + "\" has been moved to:");
+  console.dir(pos);
+});
 console.log(pt.getClassName());
 console.log(pt.getName());
 console.dir(pt.getPosition());
+pt.setPosition({x: 4, y: 5});
