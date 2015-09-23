@@ -14,6 +14,7 @@ global.boplexGulp.config.libFiles =  [
     boplexGulp.config.srcDir + "/boplex.boplex.js",
     boplexGulp.config.srcDir + "/boplex.baseObject.js",
     boplexGulp.config.srcDir + "/boplex.logger.js",
+    boplexGulp.config.srcDir + "/boplex.event.js",
 ];
 
 global.boplexGulp.config.appFiles = [
