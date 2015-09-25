@@ -44,6 +44,10 @@ var Boplex = {};
     });
   }
 
+  function random(a, b){
+    return a + Math.round(Math.random()*(b - a));
+  }
+
   function publish(x){
     x.getFuncName = getFuncName;
     x.getClassName = getClassName;
@@ -51,6 +55,7 @@ var Boplex = {};
     x.include = include;
     x.inherit = inherit;
     x.getLogTime = getLogTime;
+    x.random = random;
   }
 
   defineConstProp(Boplex, "Version", _version);
@@ -165,7 +170,7 @@ console.log("Boplex Version: " + Boplex.Version);
 var bo = new Boplex.BaseObject();
 console.log(bo.getClassName());
 
-var pt = new boplexTest.Point("A", 3, 0, function(pt, pos){
+var pt = new boplexTest.Point("A", 3, Boplex.random(0, 5), function(pt, pos){
   console.log("Point \"" + pt.getName() + "\" has been moved to:");
   console.dir(pos);
 });

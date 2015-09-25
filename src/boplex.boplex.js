@@ -44,6 +44,10 @@ var Boplex = {};
     });
   }
 
+  function random(a, b){
+    return a + Math.round(Math.random()*(b - a));
+  }
+
   function publish(x){
     x.getFuncName = getFuncName;
     x.getClassName = getClassName;
@@ -51,6 +55,7 @@ var Boplex = {};
     x.include = include;
     x.inherit = inherit;
     x.getLogTime = getLogTime;
+    x.random = random;
   }
 
   defineConstProp(Boplex, "Version", _version);
