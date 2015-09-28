@@ -3,7 +3,7 @@ var Boplex = {};
 
 (function(Boplex){
 
-  var _version = "0.0.2";
+  var _version = "0.0.3";
 
   function getFuncName(f){
     var funcNameRegex = /function (.{1,})\(/;
@@ -11,19 +11,14 @@ var Boplex = {};
     return (results && results.length > 1) ? results[1] : "";
   }
 
-  function getClassName(obj){
-    return getFuncName(obj.constructor);
+  function include(x, child, className){
+    x[className] = child;
   }
 
-  function include(x, child){
-    var name = getFuncName(child);
-    x[name] = child;
-  }
-
-  function inherit(x, child,parent){
-    include(x, child);
+  function inherit(child, parent){
     child.prototype = Object.create(parent.prototype);
     child.prototype.constructor = child;
+    return child;
   }
 
   function getLogTime(currentdate){
@@ -50,7 +45,6 @@ var Boplex = {};
 
   function publish(x){
     x.getFuncName = getFuncName;
-    x.getClassName = getClassName;
     x.defineConstProp = defineConstProp;
     x.include = include;
     x.inherit = inherit;

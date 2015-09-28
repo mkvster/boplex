@@ -1,9 +1,9 @@
-(function(target){
+(function(boplexTest){
   "use strict";
 
   function Point(name, x, y, onMoved) {
     Boplex.BaseObject.call(this);
-    var _logger = new Boplex.Logger("boplexTest." + this.getClassName());
+    var _logger = new Boplex.Logger("boplexTest.Point");
     this.name = name;
     var _x = x;
     var _y = y;
@@ -29,6 +29,6 @@
       _logger.log("x:" + _x + ", y: " + _y);
     };
   }
-  Boplex.inherit(target, Point, Boplex.BaseObject);
+  boplexTest.Point = Boplex.inherit(Point, Object);
 
 })(boplexTest);

@@ -48,8 +48,8 @@ gulp.task("build-dev", function(done){
 });
 
 //TODO: more tests
-gulp.task("build-test", function(done){
-  util.log(util.colors.blue("Build test"));
+gulp.task("build-test-dev", function(done){
+  util.log(util.colors.blue("Build test dev"));
   var fileList = boplexGulp.config.libFiles
     .concat(boplexGulp.config.appFiles);
   fileList.push(boplexGulp.config.tstDir+"/boplex_test.js")
@@ -57,6 +57,15 @@ gulp.task("build-test", function(done){
   return buildBase(false, fileList, "test");
 });
 
+gulp.task("build-test-bin", function(done){
+  util.log(util.colors.blue("Build test bin"));
+  var fileList = boplexGulp.config.libFiles
+    .concat(boplexGulp.config.appFiles);
+  fileList.push(boplexGulp.config.tstDir+"/boplex_test.js")
+  util.log(util.colors.blue("Build test app"));
+  return buildBase(true, fileList, "test");
+});
+
 gulp.task('build', function (done) {
-    runSeq('build-dev', 'build-bin', 'build-test', done);
+    runSeq('build-dev', 'build-bin', 'build-test-dev', 'build-test-bin', done);
 });

@@ -3,7 +3,7 @@ var Boplex = {};
 
 (function(Boplex){
 
-  var _version = "0.0.2";
+  var _version = "0.0.3";
 
   function getFuncName(f){
     var funcNameRegex = /function (.{1,})\(/;
@@ -11,19 +11,14 @@ var Boplex = {};
     return (results && results.length > 1) ? results[1] : "";
   }
 
-  function getClassName(obj){
-    return getFuncName(obj.constructor);
+  function include(x, child, className){
+    x[className] = child;
   }
 
-  function include(x, child){
-    var name = getFuncName(child);
-    x[name] = child;
-  }
-
-  function inherit(x, child,parent){
-    include(x, child);
+  function inherit(child, parent){
     child.prototype = Object.create(parent.prototype);
     child.prototype.constructor = child;
+    return child;
   }
 
   function getLogTime(currentdate){
@@ -50,7 +45,6 @@ var Boplex = {};
 
   function publish(x){
     x.getFuncName = getFuncName;
-    x.getClassName = getClassName;
     x.defineConstProp = defineConstProp;
     x.include = include;
     x.inherit = inherit;
@@ -67,9 +61,7 @@ var Boplex = {};
   "use strict";
 
   function BaseObject() {
-    BaseObject.prototype.getClassName = function() {
-      return Boplex.getClassName(this);
-    };
+    "obsolete";
   }
 
   function publish(x){
@@ -126,16 +118,16 @@ var Boplex = {};
 var boplexTest = {};
 (function(boplexTest){
 
-  boplexTest.Version = "0.0.2";
+  boplexTest.Version = "0.0.3";
 
 })(boplexTest);
 
-(function(target){
+(function(boplexTest){
   "use strict";
 
   function Point(name, x, y, onMoved) {
     Boplex.BaseObject.call(this);
-    var _logger = new Boplex.Logger("boplexTest." + this.getClassName());
+    var _logger = new Boplex.Logger("boplexTest.Point");
     this.name = name;
     var _x = x;
     var _y = y;
@@ -161,20 +153,22 @@ var boplexTest = {};
       _logger.log("x:" + _x + ", y: " + _y);
     };
   }
-  Boplex.inherit(target, Point, Boplex.BaseObject);
+  boplexTest.Point = Boplex.inherit(Point, Object);
 
 })(boplexTest);
 
 console.log("Boplex Version: " + Boplex.Version);
 
-var bo = new Boplex.BaseObject();
-console.log(bo.getClassName());
-
+boplexTest.Point.prototype.className = "boplexTest.Point";
 var pt = new boplexTest.Point("A", 3, Boplex.random(0, 5), function(pt, pos){
   console.log("Point \"" + pt.getName() + "\" has been moved to:");
   console.dir(pos);
 });
-console.log(pt.getClassName());
-console.log(pt.getName());
+
+console.log(pt.className);
+console.log("Point \"" + pt.getName() + "\" is located at:");
 console.dir(pt.getPosition());
 pt.setPosition({x: 4, y: 5});
+
+console.log(boplexTest.Point.prototype);
+console.dir(boplexTest.Point.prototype);
