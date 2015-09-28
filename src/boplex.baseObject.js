@@ -2,9 +2,7 @@
   "use strict";
 
   function BaseObject() {
-    BaseObject.prototype.getClassName = function() {
-      return Boplex.getClassName(this);
-    };
+    "obsolete";
   }
 
   function publish(x){

@@ -2,6 +2,6 @@
 var boplexTest = {};
 (function(boplexTest){
 
-  boplexTest.Version = "0.0.2";
+  boplexTest.Version = "0.0.3";
 
 })(boplexTest);
